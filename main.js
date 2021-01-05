@@ -10,8 +10,8 @@ function timer(){
 
 function iniciar(){
 
-    minutos = 24;
-    segundos = 59;
+    minutos = 0;
+    segundos = 9;
 
     document.getElementById("minutos").innerHTML = minutos;
     document.getElementById("segundos").innerHTML = segundos;
@@ -34,10 +34,17 @@ function iniciar(){
                 clearInterval(intervalo_minutos);
                 clearInterval(intervalo_segundos);
 
+                alarme();
+
                 document.getElementById("mensagem").innerHTML = "Clique em iniciar e descanse por 5 minutos.";
 
             }
             segundos = 60;
         }
     }
+}
+
+function alarme() {
+    var snd = new Audio("./alarme.mp3");
+    snd.play();
 }
