@@ -27,3 +27,11 @@ html *{
     border-radius: 8px;
     border: #bbb 1px solid;
 }
+#mensagem{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
