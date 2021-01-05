@@ -1,0 +1,29 @@
+html *{
+    margin: 0px;
+    padding: 0px;
+}
+.container{
+    background-color: #eee;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+.timerContainer{
+    padding: 20px;
+    font-size: 110%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+}
+.button{
+    padding: 10px;
+    margin: 0px 10px 20px 5px;
+    border-radius: 8px;
+    border: #bbb 1px solid;
+}
