@@ -6,7 +6,7 @@ html *{
     background-color: #eee;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
 }
 .timerContainer{
     padding: 20px;
@@ -34,4 +34,8 @@ html *{
     display: block;
     text-align: center;
     margin-bottom: 10px;
+}
+#contagem{
+    float: right;
+    padding: 0px 20px;
 }
