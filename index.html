@@ -10,12 +10,14 @@
     <title>Pomodoro</title>
 </head>
 
-<body onload="timer()">
+<body onload="timer(25,0)">
     <div class="container">
       <h1 class="textoInicial">Pomodoro</h1>
         <div class="timerContainer">
             <div class="timer">
+                <button id="menos"><</button>
                 <span class="minutos" id="minutos"></span>
+                <button id="mais">></button>
                 <span>:</span>
                 <span class="segundos" id="segundos"></span>
             </div>

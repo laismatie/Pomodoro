@@ -1,9 +1,9 @@
 html *{
     margin: 0px;
     padding: 0px;
+    background-color: #eee;
 }
 .container{
-    background-color: #eee;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     padding: 20px;

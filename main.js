@@ -1,19 +1,26 @@
-var minutos = 25;
-var segundos = 0;
 var contagem = 0;
+var minutosAtualizado = 25;
 
+function timer(minutos, segundos){
+    let min = minutos;
+    let seg = segundos
+    document.getElementById("minutos").innerHTML = min;
+    document.getElementById("segundos").innerHTML = `0${seg}`;
 
-function timer(){
-    document.getElementById("minutos").innerHTML = minutos;
-    document.getElementById("segundos").innerHTML = `0${segundos}`;
-}
-
-function atualizaTimer(){
-
+    document.getElementById('mais').addEventListener('click', function(){
+        minutos += 1
+        document.getElementById("minutos").innerHTML = minutos;
+        minutosAtualizado = minutos;
+    });
+    document.getElementById('menos').addEventListener('click', function(){
+        minutos -= 1
+        document.getElementById("minutos").innerHTML = minutos;
+        minutosAtualizado = minutos;
+    });
 }
 
 function iniciar(){
-    iniciarTimer(0,5); 
+    iniciarTimer(minutosAtualizado, 5); 
     contagem++;
     total();
 }
