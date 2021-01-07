@@ -39,3 +39,15 @@ html *{
     float: right;
     padding: 0px 20px;
 }
+#menos{
+    border: none;
+    padding: 5px;
+    box-shadow: none;
+    font-size: 110%;
+}
+#mais{
+    border: none;
+    padding: 5px;
+    box-shadow: none;
+    font-size: 110%;
+}

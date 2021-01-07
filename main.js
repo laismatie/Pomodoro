@@ -1,7 +1,8 @@
 var contagem = 0;
-var minutosAtualizado = 25;
+var minutosAtualizado = 0;
 
 function timer(minutos, segundos){
+    document.getElementById("intervaloLongo").disabled = true; 
     let min = minutos;
     let seg = segundos
     document.getElementById("minutos").innerHTML = min;
@@ -20,29 +21,38 @@ function timer(minutos, segundos){
 }
 
 function iniciar(){
+    document.getElementById("intervalo").disabled = true; 
+    document.getElementById("iniciar").disabled = true;  
     iniciarTimer(minutosAtualizado, 5); 
     contagem++;
-    total();
 }
 
 function intervalo(){
+    document.getElementById("intervalo").disabled = true; 
+    document.getElementById("iniciar").disabled = true; 
+    document.getElementById("reiniciar").disabled = true; 
     iniciarTimer(0,2); 
     total();
 }
 
 function reiniciar(){
+    document.getElementById("intervalo").disabled = true; 
+    document.getElementById("iniciar").disabled = true; 
     iniciarTimer(0,4); 
     total();
 }
 
-function zerar(){
-    contagem = 0;
-    document.getElementById("mensagem").innerHTML = "Você zerou a contagem";
+function intervaloLongo(){
+    document.getElementById("intervaloLongo").disabled = true; 
+    document.getElementById("intervalo").disabled = true; 
+    document.getElementById("iniciar").disabled = true; 
+    document.getElementById("reiniciar").disabled = true; 
+    iniciarTimer(0,10); 
     total();
 }
 
 function total(){
-    document.getElementById("contagem").innerHTML = `Total de pomodoros: ${contagem}`;
+    document.getElementById("contagem").innerHTML = `Total de sessões: ${contagem}`;
 }
 
 function iniciarTimer(minutos, segundos){
@@ -77,13 +87,21 @@ function iniciarTimer(minutos, segundos){
             document.getElementById("segundos").innerHTML = segundos;
         }
     
-        if(segundos == 0){
-            if(minutos == 0){
+        if(segundos <= 0){
+            if(minutos <= 0){
                 limparIntervalo(intervalo_minutos, intervalo_segundos);
     
                 alarme();
+                total();
                                         
                 document.getElementById("mensagem").innerHTML = "Alarme";
+
+                document.getElementById("intervalo").disabled = false; 
+                document.getElementById("iniciar").disabled = false;  
+                
+                if(contagem >= 4){
+                    document.getElementById("intervaloLongo").disabled = false; 
+                }
     
             }
             segundos = 60;
@@ -100,3 +118,4 @@ function alarme() {
     var snd = new Audio("./alarme.mp3");
     snd.play();
 }
+
