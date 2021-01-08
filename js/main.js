@@ -1,7 +1,10 @@
 var contagem = 0;
 var minutosAtualizado = 0;
+var minutos = 25;
+var segundos = 0;
 
 function timer(minutos, segundos){
+
     document.getElementById("intervaloLongo").disabled = true; 
     let min = minutos;
     let seg = segundos
@@ -9,12 +12,12 @@ function timer(minutos, segundos){
     document.getElementById("segundos").innerHTML = `0${seg}`;
 
     document.getElementById('mais').addEventListener('click', function(){
-        minutos += 1
+        minutos++;
         document.getElementById("minutos").innerHTML = minutos;
         minutosAtualizado = minutos;
     });
     document.getElementById('menos').addEventListener('click', function(){
-        minutos -= 1
+        minutos--;
         document.getElementById("minutos").innerHTML = minutos;
         minutosAtualizado = minutos;
     });
@@ -28,26 +31,23 @@ function iniciar(){
 }
 
 function intervalo(){
+    minutos = 5;
+    segundos = 0;
     document.getElementById("intervalo").disabled = true; 
     document.getElementById("iniciar").disabled = true; 
-    document.getElementById("reiniciar").disabled = true; 
-    iniciarTimer(0,2); 
-    total();
-}
-
-function reiniciar(){
-    document.getElementById("intervalo").disabled = true; 
-    document.getElementById("iniciar").disabled = true; 
-    iniciarTimer(0,4); 
+    timer(minutos, segundos); 
+    iniciarTimer(4, 59); 
     total();
 }
 
 function intervaloLongo(){
+    minutos = 10;
+    segundos = 0;
     document.getElementById("intervaloLongo").disabled = true; 
     document.getElementById("intervalo").disabled = true; 
     document.getElementById("iniciar").disabled = true; 
-    document.getElementById("reiniciar").disabled = true; 
-    iniciarTimer(0,10); 
+    timer(minutos, segundos); 
+    iniciarTimer(9, 59); 
     total();
 }
 
@@ -69,9 +69,18 @@ function iniciarTimer(minutos, segundos){
 
     var intervalo_minutos = setInterval(minutoTimer, 60000);
     var intervalo_segundos = setInterval(segundoTimer, 1000);
+
+    document.getElementById('reiniciar').addEventListener('click', function(){
+        document.getElementById("intervalo").disabled = true; 
+        document.getElementById("iniciar").disabled = true; 
+        limparIntervalo(intervalo_minutos, intervalo_segundos);
+        timer(minutosAtualizado, 0);
+        document.getElementById("intervalo").disabled = false; 
+        document.getElementById("iniciar").disabled = false; 
+    });
         
     function minutoTimer(){
-        minutos += -1;
+        minutos--;
         if(minutos<10){
             document.getElementById("minutos").innerHTML = `0${minutos}`;
         }else{
@@ -80,7 +89,7 @@ function iniciarTimer(minutos, segundos){
     }
         
     function segundoTimer(){
-        segundos += -1;
+        segundos--;
         if(segundos<10){
             document.getElementById("segundos").innerHTML = `0${segundos}`;
         }else{
@@ -118,4 +127,3 @@ function alarme() {
     var snd = new Audio("./alarme.mp3");
     snd.play();
 }
-
