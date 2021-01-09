@@ -2,9 +2,9 @@ html *{
     margin: 0px;
     padding: 0px;
     background-color: #eee;
+    font-family: 'Montserrat', sans-serif;
 }
 .container{
-    font-family: 'Montserrat', sans-serif;
     text-align: center;
     padding: 20px;
 }
@@ -21,11 +21,26 @@ html *{
     justify-content: center;
  
 }
+.timer{
+    display: inline-flex;
+    align-items: center;
+}
 .button{
     padding: 10px;
     margin: 0px 10px 20px 5px;
     border-radius: 8px;
     border: #bbb 1px solid;
+    font-size: 100%;
+    font-weight: bold;
+}
+.controle{
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+.valores{
+    font-size: 150%;
+    font-weight: bold;
 }
 #mensagem{
     font-family: 'Montserrat', sans-serif;
@@ -41,13 +56,28 @@ html *{
 }
 #menos{
     border: none;
-    padding: 5px;
+    padding: 0px;
     box-shadow: none;
     font-size: 110%;
 }
 #mais{
     border: none;
-    padding: 5px;
+    padding: 0px;
     box-shadow: none;
     font-size: 110%;
+}
+#iniciar{
+    background-color: lightgreen;
+}
+#pause{
+    background-color: lightcoral;
+}
+#intervalo{
+    background-color: rgb(255, 255, 129);
+}
+#intervaloLongo{
+    background-color: rgb(237, 185, 107);
+}
+#reiniciar{
+    background-color: lightblue;
 }

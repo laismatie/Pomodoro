@@ -1,6 +1,7 @@
+
 var contagem = 0;
-var minutosAtualizado = 0;
 var minutos = 25;
+//var minutosAtualizado = minutos;
 var segundos = 0;
 
 function timer(minutos, segundos){
@@ -14,19 +15,17 @@ function timer(minutos, segundos){
     document.getElementById('mais').addEventListener('click', function(){
         minutos++;
         document.getElementById("minutos").innerHTML = minutos;
-        minutosAtualizado = minutos;
     });
     document.getElementById('menos').addEventListener('click', function(){
         minutos--;
         document.getElementById("minutos").innerHTML = minutos;
-        minutosAtualizado = minutos;
     });
 }
 
 function iniciar(){
     document.getElementById("intervalo").disabled = true; 
     document.getElementById("iniciar").disabled = true;  
-    iniciarTimer(minutosAtualizado, 5); 
+    iniciarTimer(minutos, 5); 
     contagem++;
 }
 
@@ -74,7 +73,23 @@ function iniciarTimer(minutos, segundos){
         document.getElementById("intervalo").disabled = true; 
         document.getElementById("iniciar").disabled = true; 
         limparIntervalo(intervalo_minutos, intervalo_segundos);
-        timer(minutosAtualizado, 0);
+        timer(minutos, 0);
+        document.getElementById("intervalo").disabled = false; 
+        document.getElementById("iniciar").disabled = false; 
+    });
+
+    document.getElementById('pause').addEventListener('click', function(){
+        document.getElementById("intervalo").disabled = true; 
+        document.getElementById("iniciar").disabled = true; 
+        limparIntervalo(intervalo_minutos, intervalo_segundos);
+        document.getElementById("intervalo").disabled = false; 
+        document.getElementById("iniciar").disabled = false; 
+    });
+
+    document.getElementById('pause').addEventListener('dblclick', function(){
+        document.getElementById("intervalo").disabled = true; 
+        document.getElementById("iniciar").disabled = true; 
+        iniciarTimer(minutos, segundos);
         document.getElementById("intervalo").disabled = false; 
         document.getElementById("iniciar").disabled = false; 
     });
@@ -111,7 +126,6 @@ function iniciarTimer(minutos, segundos){
                 if(contagem >= 4){
                     document.getElementById("intervaloLongo").disabled = false; 
                 }
-    
             }
             segundos = 60;
             }
@@ -124,6 +138,6 @@ function limparIntervalo(intervalo_minutos,intervalo_segundos){
 }
 
 function alarme() {
-    var snd = new Audio("./alarme.mp3");
+    var snd = new Audio("../alarm.mp3");
     snd.play();
 }
