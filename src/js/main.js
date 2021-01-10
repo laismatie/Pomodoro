@@ -1,31 +1,40 @@
-
 var contagem = 0;
-var minutos = 25;
-//var minutosAtualizado = minutos;
-var segundos = 0;
+
+var minutosAlterado=25;
 
 function timer(minutos, segundos){
-
     document.getElementById("intervaloLongo").disabled = true; 
     let min = minutos;
     let seg = segundos
-    document.getElementById("minutos").innerHTML = min;
-    document.getElementById("segundos").innerHTML = `0${seg}`;
+
+    document.getElementById('menos').addEventListener('click', function(){
+        if(min==0){
+            document.getElementById("mensagem").innerHTML = "Não pode ser menor que 0.";
+            min=0;
+        }else if (min>0){
+            min--;
+            minutosAlterado--;
+        }
+        setTimer(min,seg);
+    });
 
     document.getElementById('mais').addEventListener('click', function(){
-        minutos++;
-        document.getElementById("minutos").innerHTML = minutos;
+        min++;
+        setTimer(min,seg);
+        minutosAlterado++;
+        console.log(min);
     });
-    document.getElementById('menos').addEventListener('click', function(){
-        minutos--;
-        document.getElementById("minutos").innerHTML = minutos;
-    });
+
+    setTimer(min,seg);
+   
 }
 
 function iniciar(){
     document.getElementById("intervalo").disabled = true; 
-    document.getElementById("iniciar").disabled = true;  
-    iniciarTimer(minutos, 5); 
+    document.getElementById("iniciar").disabled = true; 
+    document.getElementById("menos").disabled = true; 
+    document.getElementById("mais").disabled = true; 
+    iniciarTimer(minutosAlterado,0)
     contagem++;
 }
 
@@ -33,9 +42,8 @@ function intervalo(){
     minutos = 5;
     segundos = 0;
     document.getElementById("intervalo").disabled = true; 
-    document.getElementById("iniciar").disabled = true; 
-    timer(minutos, segundos); 
-    iniciarTimer(4, 59); 
+    //document.getElementById("iniciar").disabled = true;  
+    iniciarTimer(minutos, segundos); 
     total();
 }
 
@@ -58,13 +66,7 @@ function iniciarTimer(minutos, segundos){
 
     document.getElementById("mensagem").innerHTML = "";
 
-    if(minutos<10){
-        document.getElementById("minutos").innerHTML = `0${minutos}`;
-    }else{
-        document.getElementById("minutos").innerHTML = minutos;
-    }
-    
-    document.getElementById("segundos").innerHTML = segundos;
+    setTimer(minutos,segundos);
 
     var intervalo_minutos = setInterval(minutoTimer, 60000);
     var intervalo_segundos = setInterval(segundoTimer, 1000);
@@ -73,58 +75,51 @@ function iniciarTimer(minutos, segundos){
         document.getElementById("intervalo").disabled = true; 
         document.getElementById("iniciar").disabled = true; 
         limparIntervalo(intervalo_minutos, intervalo_segundos);
-        timer(minutos, 0);
-        document.getElementById("intervalo").disabled = false; 
-        document.getElementById("iniciar").disabled = false; 
+        iniciar(minutosAlterado, 0);
     });
 
     document.getElementById('pause').addEventListener('click', function(){
+        document.getElementById('pause').innerText="Continuar";
+        document.getElementById('pause').style.backgroundColor= "#ddd";
         document.getElementById("intervalo").disabled = true; 
         document.getElementById("iniciar").disabled = true; 
         limparIntervalo(intervalo_minutos, intervalo_segundos);
-        document.getElementById("intervalo").disabled = false; 
-        document.getElementById("iniciar").disabled = false; 
     });
 
     document.getElementById('pause').addEventListener('dblclick', function(){
+        document.getElementById('pause').innerText="Pause";
+        document.getElementById('pause').style.backgroundColor= "#lightcoral";
         document.getElementById("intervalo").disabled = true; 
         document.getElementById("iniciar").disabled = true; 
         iniciarTimer(minutos, segundos);
-        document.getElementById("intervalo").disabled = false; 
-        document.getElementById("iniciar").disabled = false; 
     });
         
     function minutoTimer(){
         minutos--;
-        if(minutos<10){
-            document.getElementById("minutos").innerHTML = `0${minutos}`;
-        }else{
-            document.getElementById("minutos").innerHTML = minutos;
-        }
+        setTimer(minutos,segundos);
     }
         
     function segundoTimer(){
+        setTimer(minutos,segundos);
         segundos--;
-        if(segundos<10){
-            document.getElementById("segundos").innerHTML = `0${segundos}`;
-        }else{
-            document.getElementById("segundos").innerHTML = segundos;
-        }
-    
-        if(segundos <= 0){
+        if(segundos < 0){
             if(minutos <= 0){
                 limparIntervalo(intervalo_minutos, intervalo_segundos);
     
                 alarme();
+
                 total();
                                         
                 document.getElementById("mensagem").innerHTML = "Alarme";
 
                 document.getElementById("intervalo").disabled = false; 
-                document.getElementById("iniciar").disabled = false;  
+                document.getElementById("iniciar").disabled = false; 
+                document.getElementById("menos").disabled = false; 
+                document.getElementById("mais").disabled = false;  
                 
                 if(contagem >= 4){
                     document.getElementById("intervaloLongo").disabled = false; 
+                    document.getElementById("mensagem").innerHTML = "Descanse por 10 minutos.";
                 }
             }
             segundos = 60;
@@ -140,4 +135,9 @@ function limparIntervalo(intervalo_minutos,intervalo_segundos){
 function alarme() {
     var snd = new Audio("../alarm.mp3");
     snd.play();
+}
+
+function setTimer(minutos, segundos) {
+    document.getElementById("minutos").innerHTML = minutos<=0 ? `0${minutos}` : `${minutos}`;
+    document.getElementById("segundos").innerHTML = segundos<=0 ? `0${segundos}` : `${segundos}`;
 }
