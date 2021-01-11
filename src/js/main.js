@@ -99,10 +99,9 @@ function iniciarTimer(minutos, segundos){
     }
         
     function segundoTimer(){
-        setTimer(minutos,segundos);
         segundos--;
-        if(segundos <= 0){
-            if(minutos <= 0){
+        if(segundos == 0){
+            if(minutos == 0){
                 limparIntervalo(intervalo_minutos, intervalo_segundos);
     
                 alarme();
@@ -117,11 +116,18 @@ function iniciarTimer(minutos, segundos){
                 
                 if(contagem >= 4){
                     document.getElementById("intervaloLongo").disabled = false; 
-                    document.getElementById("mensagem").innerHTML = "Você pode descansar por 10 minutos.";
+                    document.getElementById("mensagem").innerHTML = "Descanse por 10 minutos.";
                 }
             }
             segundos = 60;
             }
+
+            if(segundos==60){
+                setTimer(minutos,0);
+            }else{
+                setTimer(minutos,segundos);
+            }
+
         }
 }
 
